@@ -41,3 +41,7 @@ IntelliJ IDEA автоматически синхронизирует струк
 > 📌 **Пороговое значение:** 3 часа в неделю — минимальная нагрузка для допуска к спринту.
  
 Ссылка на урок - https://mentee-power.xl.ru/learn/MCIneBj4KkyH-GIRCspFvA/theory
+
+### Правило веток: feature/DVT-X
+
+В Dev Tools оставляем master чистым, работу ведём в ветке feature/DVT-<номер>
