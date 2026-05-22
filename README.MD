@@ -11,7 +11,7 @@
 Package (пакет) — это логическая группировка классов, которая предотвращает конфликты имён и упрощает навигацию.
 Объявление package ru.mentee.power; в начале файла говорит компилятору: «класс принадлежит пространству имён ru.mentee.power»,
 и IDE автоматически размещает файл в папке src/main/java/ru/mentee/power/. 
-В Java имя класса формируется как «полное имя пакета + имя класса» (Fully Qualified Name, FQN): ru.mentee.power.ProgressDemo.
+В Java имя класса формируется как «полное имя пакета + имя класса» (Fully Qualified Name, FQN): ru.mentee.power.devtools.ProgressDemo.
 
 Зачем это нужно: Без пакетов два класса с одинаковым именем (например, Progress из модуля A и Progress из модуля B) 
 столкнутся при импорте, и компилятор не сможет различить их. 
@@ -59,4 +59,30 @@ IntelliJ IDEA автоматически синхронизирует струк
 называется Локальный репозиторий (Local Repository). 
 Команда git commit создает новый коммит, который фиксирует все изменения, находящиеся в индексе,
 и добавляет его в историю локального репозитория.
+
+## Сценарий ручной проверки DVT-6
+
+### Запуск приложения
+1. Откройте Gradle Tool Window (View → Tool Windows → Gradle)
+2. Выполните: devtools → Tasks → application → run
+3. Ожидаемый вывод в Run Tool Window:
+   Суммарно: пройдено 25 из 36 уроков, осталось 11 уроков
+
+### Запуск тестов
+1. Откройте Gradle Tool Window
+2. Выполните: devtools → Tasks → verification → test
+3. Ожидаемый вывод: BUILD SUCCESSFUL, все тесты зелёные
+
+### Отладка через Debug
+1. Установите breakpoint на строке цикла while в ProgressTracker.calculateProgress
+2. Запустите Debug: кликните правой кнопкой на main → Debug 'ProgressTracker.main()'
+3. Используйте Step Over (F8) для прохождения итераций
+4. Проверьте Variables: counter, remainingHours должны изменяться корректно
+5. Используйте Evaluate Expression (Alt+F8): вычислите remainingLessons * 2
+6. Ожидаемый результат Evaluate: 14 (для completedLessons=5, totalLessons=12)
+
+### Что делать при ошибках
+- Если вывод некорректен: проверьте логику цикла через Debug
+- Если тесты красные: откройте вывод теста, найдите AssertionError, скорректируйте метод
+- Если Debug не останавливается: убедитесь, что breakpoint установлен (красный кружок)
 
