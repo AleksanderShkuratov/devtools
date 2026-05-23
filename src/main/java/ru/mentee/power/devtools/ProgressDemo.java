@@ -1,4 +1,4 @@
-package ru.mentee.power;
+package ru.mentee.power.devtools;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
