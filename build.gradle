@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 compileJava.options.encoding = 'UTF-8'
@@ -14,6 +16,10 @@ tasks.withType(JavaExec) {
     systemProperty 'file.encoding', 'UTF-8'
     systemProperty 'sun.stdout.encoding', 'UTF-8'
     systemProperty 'sun.stderr.encoding', 'UTF-8'
+}
+
+tasks.withType(Checkstyle).configureEach {
+    group = 'verification'
 }
 
 group = 'ru.mentee.power'
@@ -46,6 +52,47 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+checkstyle {
+    toolVersion = '12.2.0'
+    maxErrors = 0 // даже 1 ошибка (severity = error) -> BUILD FAILED
+    maxWarnings = 999 // предупреждение (severity = warning) не блокирует сборку
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+jacoco {
+    toolVersion = '0.8.14'
+}
+
+// Настройка тестов
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport  // генерировать отчёт после тестов
+}
+
+// Настройка JaCoCo отчёта
+jacocoTestReport {
+    dependsOn test  // отчёт генерируется после выполнения тестов
+    reports {
+        xml.required = false
+        csv.required = false
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
+    }
+}
+
+// Настройка проверки покрытия (минимум 80%)
+jacocoTestCoverageVerification {
+    dependsOn jacocoTestReport
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80  // 80% покрытия инструкций
+            }
+        }
+    }
+}
+
+// Интеграция проверок в lifecycle
+check {
+    dependsOn jacocoTestCoverageVerification
 }
