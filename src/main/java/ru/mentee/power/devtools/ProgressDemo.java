@@ -8,8 +8,9 @@ import java.util.List;
 public class ProgressDemo {
 
   static void main(String[] args) {
-
-    String branchName = getCurrentBranchName();
+    // 1. Путь к файлу .git/HEAD относительно корня проекта
+    Path gitHeadPath = Paths.get(".git", "HEAD");
+    String branchName = getCurrentBranchName(gitHeadPath);
     if (branchName != null) {
       System.out.println("Текущая ветка Git: " + branchName);
       System.out.println("---");
@@ -34,11 +35,8 @@ public class ProgressDemo {
     }
   }
 
-  public static String getCurrentBranchName() {
+  public static String getCurrentBranchName(Path gitHeadPath) {
     try {
-      // 1. Путь к файлу .git/HEAD относительно корня проекта
-      Path gitHeadPath = Paths.get(".git", "HEAD");
-
       // 2. Проверяем, существует ли файл
       if (!Files.exists(gitHeadPath)) {
         System.out.println("Файл .git/HEAD не найден.");
