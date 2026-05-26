@@ -68,7 +68,7 @@ public class ProgressDemo {
         return null;
       }
 
-      } catch (Exception e) {
+    } catch (Exception e) {
       System.out.println("Ошибка при чтении .git/HEAD: " + e.getMessage());
       return null;
     }
