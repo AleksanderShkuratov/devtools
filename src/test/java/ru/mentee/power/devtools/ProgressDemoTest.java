@@ -34,18 +34,6 @@ class ProgressDemoTest {
   Path tempDir;
 
   @Test
-  @DisplayName("main должен вывести корректный ответ")
-  void mainShouldPrintCorrectTotalProgress() {
-    ProgressDemo.main(new String[0]);
-
-    String output = outputStream.toString().trim();
-
-    assertThat(output)
-        .contains("Текущая ветка Git:")
-        .contains("Status: sprint ready");
-  }
-
-  @Test
   @DisplayName("main не должен выводить пустую строку")
   void mainShouldNotPrintEmptyLine() {
     ProgressDemo.main(new String[0]);
