@@ -1,4 +1,7 @@
 **Quick Start**
+
+[![Java CI with Checkstyle and JaCoCo](https://github.com/AleksanderShkuratov/devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/AleksanderShkuratov/devtools/actions/workflows/ci.yml)
+
 Как запускать Gradle-задачи из IDE
 1. Открой View → Tool Windows → Gradle.
 2. В дереве задач выбери 
