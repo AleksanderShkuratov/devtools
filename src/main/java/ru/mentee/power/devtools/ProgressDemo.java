@@ -9,12 +9,14 @@ public class ProgressDemo {
 
   static void main(String[] args) {
     // 1. Путь к файлу .git/HEAD относительно корня проекта
+    // TODO возможно нужно переделать получение пути - подумать...
     Path gitHeadPath = Paths.get(".git", "HEAD");
     String branchName = getCurrentBranchName(gitHeadPath);
     if (branchName != null) {
       System.out.println("Текущая ветка Git: " + branchName);
       System.out.println("---");
     } else {
+     // throw new RuntimeException ("Git-информация недоступна");
       System.out.println("Git-информация недоступна");
       System.out.println("---");
     }
